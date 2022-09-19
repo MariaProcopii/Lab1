@@ -6,13 +6,13 @@
 
 
 int main(){
-    struct Node* head = NULL;
-    struct Node* head2 = NULL;
     struct Node* p_array[LIST_AMOUNT] = {NULL};
     int value = 0;  
     int choose = 0;
     int pos = 0;
     char file_name[50];
+    int list1 = 0;
+    int list2 = 0;
  
     char* message = "Make an option:\n"
                 "\t[1] Append.\n"
@@ -23,6 +23,7 @@ int main(){
                 "\t[6] Search for a value.\n"
                 "\t[7] Join two linked lists.\n"
                 "\t[8] Backwards traversal.\n"
+                "\t[9] Sort the linked list.\n"
                 "\t[p] Print list.\n"
                 "\t[v] View all lists.\n"
                 "\t[c] Choose list to work with.\n"
@@ -74,12 +75,18 @@ int main(){
                 break;
 
             case '7':
-                join(p_array[0], p_array[1]);
-                p_array[1] = NULL;
+                printf("\nChoose what lists should be joined: ");
+                scanf("%d %d", &list1, &list2);
+                join(p_array[list1-1], p_array[list2-1]);
+                p_array[list2-1] = NULL;
                 break;
 
             case '8':
                 traverseBack(p_array[choose]);
+                break;
+
+            case '9':
+                sort(p_array[choose]);
                 break;
 
             case 'c':
@@ -89,8 +96,9 @@ int main(){
                 break;
 
             case 'v':
-            for(int i = 0; i < LIST_AMOUNT; i++)
-                print(p_array[i]);
+                printf("[%d]\n", choose + 1);
+                for(int i = 0; i < LIST_AMOUNT; i++)
+                    print(p_array[i]);
                 break;
 
             case 'p':
@@ -113,6 +121,6 @@ int main(){
                 break;
         }
     }
-
         return 0;
     }
+    

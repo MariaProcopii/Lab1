@@ -97,13 +97,16 @@ void insert(struct Node** head_r,int pos, int new_data){
     }
 }
 void removeAt(struct Node** head_r, int pos){
-    struct Node* ref = *head_r;
-    if(pos < 1 || pos > length(*head_r)){
-        printf("Something went wrong");
+
+    if((*head_r) == NULL){
+        printf("\nNothing to delete.");
         return;
     }
-    if((*head_r) == NULL){
-        printf("Nothing to delete");
+
+    struct Node* ref = *head_r;
+    
+    if(pos < 1 || pos > length(*head_r)){
+        printf("\nSomething went wrong.");
         return;
     }
     if(pos == 1){
@@ -124,6 +127,10 @@ void removeAt(struct Node** head_r, int pos){
 }
 
 void search(struct Node* head, int value){
+    if(head == NULL){
+        printf("\nNothing to search.");
+        return;
+    }
     int pos = 1;
     while(head->data != value && head->next != NULL){
         pos++;
@@ -151,6 +158,10 @@ void join(struct Node * head, struct Node* head2){
 }
 
 void traverseBack(struct Node* head){
+    if(head == NULL){
+        printf("\nNothing to traverse.");
+        return;
+    }
     while(head->next != NULL){
         head = head->next;
     }
@@ -171,6 +182,11 @@ void print(struct Node* head){
 
 
 void serialize(struct Node* head, char name[]){    //write the linked list to a file 
+    
+    if(head == NULL){
+        printf("\nThe list is empty.");
+        return;
+    }
     FILE* file = fopen(name, "w");
 
     if(file == NULL)
@@ -186,6 +202,11 @@ void serialize(struct Node* head, char name[]){    //write the linked list to a 
 }
 
 void deserialize(struct Node** head_r, char name[]){      //read the linked list from a file
+        
+        if((*head_r) != NULL){
+            printf("\nChoose an empty list.");
+            return;
+            }
     FILE* file = fopen(name, "r");
 
     if(file == NULL)
@@ -197,4 +218,31 @@ void deserialize(struct Node** head_r, char name[]){      //read the linked list
         append(head_r, val);
     }
     fclose(file);
+}
+
+void sort(struct Node* head){
+    int swap = 0;
+    struct Node* start;
+    struct Node* endList= NULL;
+
+    if(head == NULL){
+        printf("\nNothing to sort.");
+        return;
+    }
+    do
+    {
+        swap = 0;
+        start = head;
+        while(start->next != NULL){
+            if(start->data > start->next->data){
+                swap = 1;
+                int temp = start->data;
+                start->data = start->next->data;
+                start->next->data = temp;
+            }
+            start = start->next;
+        }
+        endList = start;
+    } while (swap);
+    
 }
