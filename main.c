@@ -9,7 +9,7 @@ int main(){
     struct Node* head = NULL;
     struct Node* head2 = NULL;
     struct Node* p_array[LIST_AMOUNT] = {NULL};
-    int value = 0;
+    int value = 0;  
     int choose = 0;
     int pos = 0;
  
