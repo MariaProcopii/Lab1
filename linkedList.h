@@ -168,3 +168,33 @@ void print(struct Node* head){
     }
     printf(" NULL\n");
 }
+
+
+void serialize(struct Node* head){    //write the linked list to a file 
+    FILE* file = fopen("linkedList.txt", "w");
+
+    if(file == NULL)
+        exit(1);
+
+    while(head != NULL)
+    {   
+        fprintf(file, " %d --", head->data);
+        head = head->next;
+    }
+    fprintf(file, " NULL");
+    fclose(file);
+}
+
+void deserialize(struct Node** head_r){      //read the linked list from a file
+    FILE* file = fopen("linkedList.txt", "r");
+
+    if(file == NULL)
+        exit(2);
+
+    int val = 0;
+    while(fscanf(file, " %d --", &val) > 0)
+    {
+        append(head_r, val);
+    }
+    fclose(file);
+}

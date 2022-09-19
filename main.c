@@ -2,24 +2,17 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
-int main(){
+#define LIST_AMOUNT 2
 
-    struct Node* p_array[2] = {NULL};
+
+int main(){
+    struct Node* head = NULL;
+    struct Node* head2 = NULL;
+    struct Node* p_array[LIST_AMOUNT] = {NULL};
     int value = 0;
     int choose = 0;
     int pos = 0;
-    // append(&head, 2);
-    // append(&head, 3);
-
-    // append(&head2, 4);
-    // append(&head2, 5);
-    // append(&head2, 9);    
-    // print(head);
-    // print(head2);
-    // join(head, head2);
-    // print(head);
-
-
+ 
     char* message = "Make an option:\n"
                 "\t[1] Append.\n"
                 "\t[2] Prepend.\n"
@@ -32,6 +25,8 @@ int main(){
                 "\t[p] Print list.\n"
                 "\t[v] View all lists.\n"
                 "\t[c] Choose list to work with.\n"
+                "\t[w] Write linked list in a file.\n"
+                "\t[r] Read a linked list from a file.\n"
                 "Your option: ";
 
     printf(message);
@@ -41,22 +36,6 @@ int main(){
     {
         switch(command)
         {
-
-            case 'c':
-                printf("\nChoose list [1] or [2]: ");
-                scanf("%d", &choose );
-                choose -= 1;
-                break;
-
-            case 'v':
-                print(p_array[0]);
-                print(p_array[1]);
-                break;
-
-            case 'p':
-                print(p_array[choose]);
-                break;
-
             case '1':
                 printf("\nProvide data value: ");
                 scanf("%d", &value);
@@ -101,6 +80,31 @@ int main(){
             case '8':
                 traverseBack(p_array[choose]);
                 break;
+
+            case 'c':
+                printf("\nProvide list number: ");
+                scanf("%d", &choose );
+                choose -= 1;
+                break;
+
+            case 'v':
+            for(int i = 0; i < LIST_AMOUNT; i++)
+                print(p_array[i]);
+                break;
+
+            case 'p':
+                printf("[%d]\n", choose + 1);
+                print(p_array[choose]);
+                break;
+
+            case 'w':
+                serialize(p_array[choose]);
+                break;
+
+            case 'r':
+                deserialize(&p_array[choose]);
+                break;
+
         default:
                 printf("\nYour option: ");
                 break;
