@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
-#define LIST_AMOUNT 2
+#define LIST_AMOUNT 3
 
 
 int main(){
@@ -12,6 +12,7 @@ int main(){
     int value = 0;  
     int choose = 0;
     int pos = 0;
+    char file_name[50];
  
     char* message = "Make an option:\n"
                 "\t[1] Append.\n"
@@ -98,11 +99,13 @@ int main(){
                 break;
 
             case 'w':
-                serialize(p_array[choose]);
+                printf("\nProvide a file name: ");
+                scanf("%s", file_name);
+                serialize(p_array[choose], file_name);
                 break;
 
             case 'r':
-                deserialize(&p_array[choose]);
+                deserialize(&p_array[choose], file_name);
                 break;
 
         default:

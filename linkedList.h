@@ -170,8 +170,8 @@ void print(struct Node* head){
 }
 
 
-void serialize(struct Node* head){    //write the linked list to a file 
-    FILE* file = fopen("linkedList.txt", "w");
+void serialize(struct Node* head, char name[]){    //write the linked list to a file 
+    FILE* file = fopen(name, "w");
 
     if(file == NULL)
         exit(1);
@@ -185,8 +185,8 @@ void serialize(struct Node* head){    //write the linked list to a file
     fclose(file);
 }
 
-void deserialize(struct Node** head_r){      //read the linked list from a file
-    FILE* file = fopen("linkedList.txt", "r");
+void deserialize(struct Node** head_r, char name[]){      //read the linked list from a file
+    FILE* file = fopen(name, "r");
 
     if(file == NULL)
         exit(2);
